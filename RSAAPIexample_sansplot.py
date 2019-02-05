@@ -19,7 +19,7 @@ from ctypes import *
 from os import chdir
 from time import sleep
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from RSA_API import *
 
 
@@ -131,20 +131,20 @@ def spectrum_example():
     freq = create_frequency_array(specSet)
     peakPower, peakFreq = peak_power_detector(freq, trace)
 
-    plt.figure(1, figsize=(10, 7))
-    ax = plt.subplot(111, facecolor='k')
-    ax.plot(freq, trace, color='y')
-    ax.set_title('Spectrum Trace')
-    ax.set_xlabel('Frequency (Hz)')
-    ax.set_ylabel('Amplitude (dBm)')
-    ax.axvline(peakFreq)
-    ax.text((freq[0] + specSet.span / 20), peakPower,
-            'Peak power in spectrum: {:.2f} dBm @ {} MHz'.format(
-                peakPower, peakFreq / 1e6), color='white')
-    ax.set_xlim([freq[0], freq[-1]])
-    ax.set_ylim([refLevel - 100, refLevel])
-    plt.tight_layout()
-    plt.show()
+    # plt.figure(1, figsize=(10, 7))
+    # ax = plt.subplot(111, facecolor='k')
+    # ax.plot(freq, trace, color='y')
+    # ax.set_title('Spectrum Trace')
+    # ax.set_xlabel('Frequency (Hz)')
+    # ax.set_ylabel('Amplitude (dBm)')
+    # ax.axvline(peakFreq)
+    # ax.text((freq[0] + specSet.span / 20), peakPower,
+    #         'Peak power in spectrum: {:.2f} dBm @ {} MHz'.format(
+    #             peakPower, peakFreq / 1e6), color='white')
+    # ax.set_xlim([freq[0], freq[-1]])
+    # ax.set_ylim([refLevel - 100, refLevel])
+    # plt.tight_layout()
+    # plt.show()
     rsa.DEVICE_Disconnect()
 
 
@@ -198,19 +198,19 @@ def block_iq_example():
     time = config_block_iq(cf, refLevel, iqBw, recordLength)
     IQ = acquire_block_iq(recordLength)
 
-    fig = plt.figure(1, figsize=(15, 10))
-    fig.suptitle('I and Q vs Time', fontsize='20')
-    ax1 = plt.subplot(211, facecolor='k')
-    ax1.plot(time * 1000, np.real(IQ), color='y')
-    ax1.set_ylabel('I (V)')
-    ax1.set_xlim([time[0] * 1e3, time[-1] * 1e3])
-    ax2 = plt.subplot(212, facecolor='k')
-    ax2.plot(time * 1000, np.imag(IQ), color='c')
-    ax2.set_ylabel('I (V)')
-    ax2.set_xlabel('Time (msec)')
-    ax2.set_xlim([time[0] * 1e3, time[-1] * 1e3])
-    plt.tight_layout()
-    plt.show()
+    # fig = plt.figure(1, figsize=(15, 10))
+    # fig.suptitle('I and Q vs Time', fontsize='20')
+    # ax1 = plt.subplot(211, facecolor='k')
+    # ax1.plot(time * 1000, np.real(IQ), color='y')
+    # ax1.set_ylabel('I (V)')
+    # ax1.set_xlim([time[0] * 1e3, time[-1] * 1e3])
+    # ax2 = plt.subplot(212, facecolor='k')
+    # ax2.plot(time * 1000, np.imag(IQ), color='c')
+    # ax2.set_ylabel('I (V)')
+    # ax2.set_xlabel('Time (msec)')
+    # ax2.set_xlim([time[0] * 1e3, time[-1] * 1e3])
+    # plt.tight_layout()
+    # plt.show()
     rsa.DEVICE_Disconnect()
 
 
@@ -311,44 +311,44 @@ def dpx_example():
     numTicks = 11
     plotFreq = np.linspace(cf - span / 2.0, cf + span / 2.0, numTicks) / 1e9
 
-    """################PLOT################"""
-    # Plot out the three DPX spectrum traces
-    fig = plt.figure(1, figsize=(15, 10))
-    ax1 = fig.add_subplot(131)
-    ax1.set_title('DPX Spectrum Traces')
-    ax1.set_xlabel('Frequency (GHz)')
-    ax1.set_ylabel('Amplitude (dBm)')
-    dpxFreq /= 1e9
-    st1, = plt.plot(dpxFreq, traces[0])
-    st2, = plt.plot(dpxFreq, traces[1])
-    st3, = plt.plot(dpxFreq, traces[2])
-    ax1.legend([st1, st2, st3], ['Max Hold', 'Min Hold', 'Average'])
-    ax1.set_xlim([dpxFreq[0], dpxFreq[-1]])
-
-    # Show the colorized DPX display
-    ax2 = fig.add_subplot(132)
-    ax2.imshow(dpxBitmap, cmap='gist_stern')
-    ax2.set_aspect(7)
-    ax2.set_title('DPX Bitmap')
-    ax2.set_xlabel('Frequency (GHz)')
-    ax2.set_ylabel('Amplitude (dBm)')
-    xTicks = map('{:.4}'.format, plotFreq)
-    plt.xticks(np.linspace(0, fb.spectrumBitmapWidth, numTicks), xTicks)
-    yTicks = map('{}'.format, np.linspace(refLevel, refLevel - 100, numTicks))
-    plt.yticks(np.linspace(0, fb.spectrumBitmapHeight, numTicks), yTicks)
-
-    # Show the colorized DPXogram
-    ax3 = fig.add_subplot(133)
-    ax3.imshow(dpxogram, cmap='gist_stern')
-    ax3.set_aspect(12)
-    ax3.set_title('DPXogram')
-    ax3.set_xlabel('Frequency (GHz)')
-    ax3.set_ylabel('Trace Lines')
-    xTicks = map('{:.4}'.format, plotFreq)
-    plt.xticks(np.linspace(0, fb.sogramBitmapWidth, numTicks), xTicks)
-
-    plt.tight_layout()
-    plt.show()
+    # """################PLOT################"""
+    # # Plot out the three DPX spectrum traces
+    # fig = plt.figure(1, figsize=(15, 10))
+    # ax1 = fig.add_subplot(131)
+    # ax1.set_title('DPX Spectrum Traces')
+    # ax1.set_xlabel('Frequency (GHz)')
+    # ax1.set_ylabel('Amplitude (dBm)')
+    # dpxFreq /= 1e9
+    # st1, = plt.plot(dpxFreq, traces[0])
+    # st2, = plt.plot(dpxFreq, traces[1])
+    # st3, = plt.plot(dpxFreq, traces[2])
+    # ax1.legend([st1, st2, st3], ['Max Hold', 'Min Hold', 'Average'])
+    # ax1.set_xlim([dpxFreq[0], dpxFreq[-1]])
+    #
+    # # Show the colorized DPX display
+    # ax2 = fig.add_subplot(132)
+    # ax2.imshow(dpxBitmap, cmap='gist_stern')
+    # ax2.set_aspect(7)
+    # ax2.set_title('DPX Bitmap')
+    # ax2.set_xlabel('Frequency (GHz)')
+    # ax2.set_ylabel('Amplitude (dBm)')
+    # xTicks = map('{:.4}'.format, plotFreq)
+    # plt.xticks(np.linspace(0, fb.spectrumBitmapWidth, numTicks), xTicks)
+    # yTicks = map('{}'.format, np.linspace(refLevel, refLevel - 100, numTicks))
+    # plt.yticks(np.linspace(0, fb.spectrumBitmapHeight, numTicks), yTicks)
+    #
+    # # Show the colorized DPXogram
+    # ax3 = fig.add_subplot(133)
+    # ax3.imshow(dpxogram, cmap='gist_stern')
+    # ax3.set_aspect(12)
+    # ax3.set_title('DPXogram')
+    # ax3.set_xlabel('Frequency (GHz)')
+    # ax3.set_ylabel('Trace Lines')
+    # xTicks = map('{:.4}'.format, plotFreq)
+    # plt.xticks(np.linspace(0, fb.sogramBitmapWidth, numTicks), xTicks)
+    #
+    # plt.tight_layout()
+    # plt.show()
     rsa.DEVICE_Disconnect()
 
 
@@ -470,7 +470,7 @@ def peak_power_detector(freq, trace):
 def main():
     # uncomment the example you'd like to run
     # spectrum_example()
-    # config_trigger(TriggerMode.triggered, 100, TriggerSource.TriggerSourceIFPowerLevel)
+    config_trigger(TriggerMode.triggered, 100, TriggerSource.TriggerSourceIFPowerLevel)
     # block_iq_example()
     dpx_example()
     # if_stream_example()
